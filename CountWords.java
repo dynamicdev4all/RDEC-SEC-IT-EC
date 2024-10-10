@@ -15,7 +15,10 @@ public class CountWords {
         // String[] n = str.split(" ");
         // System.out.println(n.length);
 
-        // Scanner sc = new Scanner("This is class room");
+        Scanner sc = new Scanner(" This  is class room");
+        Scanner sc2 = new Scanner(" This  is class room");
+        Scanner sc3 = new Scanner(" This  is class room");
+        Scanner sc4 = new Scanner(" This  is class room");
         // int c = 0;
         // while (sc.hasNext()) {
         // sc.next();
