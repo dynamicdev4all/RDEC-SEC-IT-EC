@@ -1,12 +1,15 @@
 import javax.swing.JFrame;
 
-public class AppFrame extends JFrame {
+public class AppFrame {
+
+    private JFrame jFrame = new JFrame();
+    LoadBundle lb = new LoadBundle();
     AppFrame() {
-        setTitle("SEC F");
-        setSize(500, 500);
-        setLocationRelativeTo(null);
+        jFrame.setTitle(lb.getConstant("APP_TITLE"));
+        jFrame.setSize(500, 500);
+        jFrame.setLocationRelativeTo(null);
         AppPanel aPanel = new AppPanel();
-        add(aPanel);
-        setVisible(true);
+        jFrame.add(aPanel);
+        jFrame.setVisible(true);
     }
 }

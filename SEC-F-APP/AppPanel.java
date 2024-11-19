@@ -16,33 +16,64 @@ public class AppPanel extends JPanel {
     Timer timer;
     int xPos = 200;
     int yPos = 300;
+    int carCount = 4;
+
+    Car cars[] = new Car[carCount];
+
+    // Car car1;
+    // Car car2;
+    // Car car3;
 
     AppPanel() {
         setSize(500, 500);
         // setBackground(Color.BLUE);
-        loadBgImage();
+        // loadBgImage();
+        // car1 = new Car(60, 300, 80, 150);
+        // car2 = new Car(190, 300, 80, 150);
+        // car3 = new Car(320, 300, 80, 150);
+        initCar();
+        // car1.loadBgImage();
         callPaintAgain();
         addKeyboardControls();
         setFocusable(true);
     }
 
-    void loadBgImage() {
-        try {
-            bgImage = ImageIO.read(AppPanel.class.getResource("car.png"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+    void initCar() {
+        int start = 30;
+        int gap = 40;
+        int speed = 3;
+        for (int i = 0; i < carCount; i++) {
+            cars[i] = new Car(start, 300, 80, 150, speed);
+            // gap = gap + 40;
+            start = start + 80 + gap;
+            speed = speed + 5;
+        }
+    }
+
+    void paintCars(Graphics pen) {
+        for (int i = 0; i < carCount; i++) {
+            cars[i].showCar(pen);
+        }
+    }
+
+    void moveAllCars() {
+        for (int i = 0; i < carCount; i++) {
+            cars[i].moveCarUp();
         }
     }
 
     @Override
     protected void paintComponent(Graphics pen) {
         super.paintComponent(pen);
-        pen.drawImage(bgImage, xPos, yPos, 100, 150, null);
+        paintCars(pen);
     }
 
     void callPaintAgain() {
-        timer = new Timer(50, (a) -> {
+        timer = new Timer(30, (a) -> {
+            // car1.moveCarUp();
+            // car2.moveCarUp();
+            // car3.moveCarUp();
+            moveAllCars();
             repaint();
         });
         timer.start();
