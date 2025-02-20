@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -17,13 +19,21 @@ public class OrgJsonDemo {
                 {"trackID":"6789","artistName":"Sonu Nigam","trackName":"Kal Ho"},]
                 """;
 
-                JSONObject
+        // JSONObject/
         JSONArray dataArray = new JSONArray(data);
 
+        ArrayList<SongModel> songList = new ArrayList<>();
+        SongModel song;
         for (int i = 0; i < dataArray.length(); i++) {
             JSONObject songObject = dataArray.getJSONObject(i);
-            System.out.println(songObject.getString("trackName"));
+            song = new SongModel(songObject.getString("trackName"), songObject.getString("artistName"),
+                    "www.google.com", "www.facebook.com", 0.99f);
+
+            songList.add(song);
+            // System.out.println(songObject.getString("trackName"));
         }
+
+        System.out.println(songList.get(4).songName);
 
         // System.out.println(dataArray.length());
     }
