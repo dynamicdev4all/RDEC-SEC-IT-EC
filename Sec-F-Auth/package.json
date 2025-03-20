@@ -1,0 +1,19 @@
+{
+  "name": "authsystem",
+  "version": "1.0.0",
+  "description": "This is an auth system app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "authSystem",
+    "best",
+    "authsystem"
+  ],
+  "author": "rdec",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
