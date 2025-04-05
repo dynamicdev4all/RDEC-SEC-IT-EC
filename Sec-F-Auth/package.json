@@ -1,19 +1,16 @@
 {
   "name": "authsystem",
   "version": "1.0.0",
-  "description": "This is an auth system app",
+  "description": "this is auth system",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "authSystem",
-    "best",
-    "authsystem"
-  ],
-  "author": "rdec",
+  "author": "RDEC",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "nodemailer": "^6.10.0"
   }
 }

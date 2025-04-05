@@ -1,29 +1,38 @@
-const e = require("express"); // import express
-
-const app = e();
+const express = require("express");
+const app = express();
+// app.use(express.static);
 
 const path = require("path");
+const dbconn = require("./config/databaseConnection");
+const { userRegister, userLogin } = require("./controllers/userController");
+app.use(express.urlencoded({ extended: true }));
 
-//this is the main route or root route
+//this is the root route or home route
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "homepage.html"));
-});
-app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "login.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "register.html"));
 });
-app.get("/account-verify", (req, res) => {
-  console.log("ACC VERIFY");
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
-app.post("/create-new-user", (req, res) => {
-  console.log("REgister is called");
+app.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
-app.post("/login-user", (req, res) => {
-  console.log("login is called");
+app.post("/create-new-user", async (req, res) => {
+  const { username, email, password } = req.body;
+  userRegister(username, email, password)
+});
+app.post("/login-user", async (req, res) => {
+  const { email, password } = req.body;
+  userLogin(email, password)
 });
 
-app.listen(6565, () => {
-  console.log("Server is running on Port 6565");
+app.listen(1234, () => {
+  console.log("the server is running");
 });
+6
+
+
+// tnee lcbe wgry osum
