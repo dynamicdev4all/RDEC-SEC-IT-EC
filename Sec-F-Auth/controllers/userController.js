@@ -1,6 +1,7 @@
 const userModel = require("../models/userModel");
 const sendMail = require("../services/sendMail");
-
+const jwt = require('jsonwebtoken');
+const JWT_SECRET='this_is_top_Secret  ';
 const userRegister = async(username, email, password)=>{
     try {
         const user = await userModel.findOne({ email: email });
@@ -13,7 +14,7 @@ const userRegister = async(username, email, password)=>{
             passsword: password,
             isActive: false,
           });
-          await newUser.save();
+          // await newUser.save();
           sendMail(email, username)
           console.log("register success");
         }
@@ -41,8 +42,25 @@ const userLogin = async(email, password)=>{
         console.log(error);
       }
 }
-
+const emailVerification = (mail_id)=>{
+  try {
+    console.log(mail_id)
+    const decode_id = jwt.verify(mail_id, JWT_SECRET);
+    console.log(decode_id)
+  const emailToBeVerified = decode_id.email;
+  console.log(emailToBeVerified)
+    
+  } catch (error) {
+    if(jwt.TokenExpiredError){
+      console.log("TOken is expired")
+    }else{
+      console.log(error)
+    }
+  }
+  
+}
 module.exports = {
     userRegister,
-    userLogin
+    userLogin,
+    emailVerification
 }

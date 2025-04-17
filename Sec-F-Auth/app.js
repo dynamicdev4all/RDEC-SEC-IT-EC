@@ -4,7 +4,7 @@ const app = express();
 
 const path = require("path");
 const dbconn = require("./config/databaseConnection");
-const { userRegister, userLogin } = require("./controllers/userController");
+const { userRegister, userLogin, emailVerification } = require("./controllers/userController");
 app.use(express.urlencoded({ extended: true }));
 
 //this is the root route or home route
@@ -22,13 +22,18 @@ app.get("/dashboard", (req, res) => {
 });
 app.post("/create-new-user", async (req, res) => {
   const { username, email, password } = req.body;
-  userRegister(username, email, password)
+  userRegister(username, email, password) 
 });
 app.post("/login-user", async (req, res) => {
   const { email, password } = req.body;
   userLogin(email, password)
 });
 
+app.get("/verify-email", (req, res) => {
+ console.log("Demo")
+ console.log(req.query.id)
+ emailVerification(req.query.id)
+});
 app.listen(1234, () => {
   console.log("the server is running");
 });

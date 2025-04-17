@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
-
+const jwt = require('jsonwebtoken');
+const JWT_SECRET='this_is_top_Secret';
 const sendMail = (email, userName)=>{    const mailTransport = nodemailer.createTransport({
         service:"gmail",
         auth:{
@@ -8,9 +9,9 @@ const sendMail = (email, userName)=>{    const mailTransport = nodemailer.create
         }
     })
 
-    // https://account.live.com/
 
-    const verificationLink = "http://localhost:1234/verify-email?token=gfdhgf545gjh"
+    const id = jwt.sign({email}, JWT_SECRET, {expiresIn:"10m"})
+    const verificationLink = `http://localhost:1234/verify-email?id=${id}`
     
     const mailToSend = ({
         from:"test.duck.mail@gmail.com",
@@ -24,7 +25,7 @@ const sendMail = (email, userName)=>{    const mailTransport = nodemailer.create
             Please click on the link below to verify your account.
         </p>
         <p>
-            <a href="${verificationLink}" style="display: inline-block; padding: 10px 15px; background-color: #007BFF; color: #ffffff; text-decoration: none; border-radius: 5px;">Verify Account</a>
+            <a href="${verificationLink}">${verificationLink}</a>
         </p>
         <p style="color: #555; line-height: 1.6;">
             Thanks & Regards,<br>
